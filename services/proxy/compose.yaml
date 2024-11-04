@@ -5,7 +5,7 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/user/1000/docker.sock:/var/run/docker.sock
       - letsencrypt_proxy_data:/letsencrypt
       - ./healthcheck/https_services.sh:/https_services.sh
       - ./config/tls.yaml:/config/traefik.pre.yaml
