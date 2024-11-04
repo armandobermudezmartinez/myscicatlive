@@ -77,7 +77,7 @@
   "searchSamples": true,
   "sftpHost": "",
   "shareEnabled": false,
-  "shoppingCartEnabled": false,
-  "shoppingCartOnHeader": false,
+  "shoppingCartEnabled": true,
+  "shoppingCartOnHeader": true,
   "tableSciDataEnabled": true
 }
