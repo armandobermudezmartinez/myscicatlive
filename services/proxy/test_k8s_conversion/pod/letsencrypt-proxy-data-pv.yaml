@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  labels:
+    io.kompose.service: letsencrypt-proxy-data
+  name: letsencrypt-proxy-data
+spec:
+  capacity:
+    storage: 100Mi # Same as PVC request
+  accessModes:
+    - ReadWriteOnce # Must match the access mode in PVC
+  persistentVolumeReclaimPolicy: Retain # Options: Retain, Recycle, Delete
+  hostPath: # Using hostPath for local development/testing; adjust as needed
+    path: /data/proxy-data
