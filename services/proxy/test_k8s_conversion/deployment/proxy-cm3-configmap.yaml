@@ -1,0 +1,23 @@
+apiVersion: v1
+data:
+  tls.yaml: |
+    # yamllint disable-file
+    {{- if $services }}
+    http:
+      routers:
+      {{- range $service := $services }}
+        {{ $router := trimSuffix "@docker" $service | trimSuffix (env "COMPOSE_PROJECT_NAME") | trimSuffix "-"}}
+        {{ $url := list $router $https_url_prefix | join "" | upper | env }}
+        {{ $router }}:
+          rule: Host(`{{ trimPrefix "https://" $url }}`)
+          service: {{ $service }}
+          entryPoints: websecure
+      {{- end }}
+    {{- end }}
+kind: ConfigMap
+metadata:
+  annotations:
+    use-subpath: "true"
+  labels:
+    io.kompose.service: proxy
+  name: proxy-cm3
