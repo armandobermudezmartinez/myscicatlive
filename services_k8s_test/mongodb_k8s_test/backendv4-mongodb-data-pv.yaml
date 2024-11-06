@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: backendv4-mongodb-data
+  labels:
+    io.kompose.service: backendv4-mongodb-data
+spec:
+  capacity:
+    storage: 100Mi # Must match the request in your PVC
+  accessModes:
+    - ReadWriteOnce # Must match the access mode in your PVC
+  hostPath: # Using hostPath for local testing; adjust as necessary
+    path: /data/backendv4-mongodb-data
