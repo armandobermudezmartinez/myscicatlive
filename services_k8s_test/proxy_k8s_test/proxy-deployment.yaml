@@ -137,6 +137,7 @@ spec:
               - key: https_services.sh
                 path: https_services.sh
             name: proxy-cm2
+            defaultMode: 0755
           name: proxy-cm2
         - configMap:
             items:
