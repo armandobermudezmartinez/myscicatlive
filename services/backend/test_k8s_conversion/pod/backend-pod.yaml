@@ -84,7 +84,14 @@ spec:
         - mountPath: /docker-entrypoints/0.sh
           name: backend-cm2
           subPath: 0.sh
-  restartPolicy: OnFailure
+      resources:
+        requests:
+          memory: "512Mi"
+          cpu: "500m"
+        limits:
+          memory: "1Gi"
+          cpu: "1000m"
+  restartPolicy: Always
   volumes:
     - configMap:
         items:
@@ -97,6 +104,7 @@ spec:
           - key: loop_entrypoints.sh
             path: loop_entrypoints.sh
         name: backend-cm1
+        defaultMode: 0755
       name: backend-cm1
     - configMap:
         items:
