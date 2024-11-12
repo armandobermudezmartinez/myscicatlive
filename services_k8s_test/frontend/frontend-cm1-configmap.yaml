@@ -1,0 +1,14 @@
+apiVersion: v1
+data:
+  config.v4.json: |
+    {
+        "accessTokenPrefix": "Bearer ",
+        "externalAuthEndpoint": "/api/v3/auth/ldap"
+    }
+kind: ConfigMap
+metadata:
+  annotations:
+    use-subpath: "true"
+  labels:
+    io.kompose.service: frontend
+  name: frontend-cm1

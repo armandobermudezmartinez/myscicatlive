@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: frontend
+  name: frontend
+spec:
+  replicas: 1 # You can adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      io.kompose.service: frontend
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f compose.yaml -f ../../backend/test_k8s_conversion/compose.yaml -f ../../mongodb/test_k8s_conversion/compose.yaml
+        kompose.version: 1.34.0 (cbf2835db)
+        traefik.http.routers.frontend.rule: Host(`localhost`)
+      labels:
+        io.kompose.service: frontend
+    spec:
+      containers:
+        - args:
+            - nginx
+            - -g
+            - daemon off;
+          command:
+            - loop_entrypoints.sh
+          env:
+            - name: BACKEND_URL
+              # value: http://backend-service:3000
+              # value: http://127.0.0.1:32000/
+              value: http://localhost:32000/
+            # - name: BACKEND_HTTPS_URL
+            # value: https://backend-service:3000
+            # value: http://127.0.0.1:32000/
+          image: ghcr.io/scicatproject/frontend:v4.4.1
+          #   image: bermudea/frontend:test
+          name: frontend
+          volumeMounts:
+            - mountPath: /config/0.json
+              name: frontend-cm0
+              subPath: 0.json
+            - mountPath: /config/1.json
+              name: frontend-cm1
+              subPath: 1.json
+            - mountPath: /usr/local/bin/loop_entrypoints.sh
+              name: frontend-cm2
+              subPath: loop_entrypoints.sh
+            - mountPath: /docker-entrypoints/1.sh
+              name: frontend-cm3
+              subPath: 1.sh\
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            items:
+              - key: config.json
+                path: 0.json
+            name: frontend-cm0
+          name: frontend-cm0
+        - configMap:
+            items:
+              - key: config.v4.json
+                path: 1.json
+            name: frontend-cm1
+          name: frontend-cm1
+        - configMap:
+            items:
+              - key: loop_entrypoints.sh
+                path: loop_entrypoints.sh
+            name: frontend-cm2
+            defaultMode: 0755
+          name: frontend-cm2
+        - configMap:
+            items:
+              - key: merge_json.sh
+                path: 1.sh
+            name: frontend-cm3
+          name: frontend-cm3

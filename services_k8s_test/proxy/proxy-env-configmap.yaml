@@ -7,10 +7,11 @@ data:
   TRAEFIK_ENTRYPOINTS_WEB_ASDEFAULT: "true"
   TRAEFIK_ENTRYPOINTS_WEBSECURE_ADDRESS: :443
   TRAEFIK_ENTRYPOINTS_WEBSECURE_HTTP_TLS_CERTRESOLVER: leresolver
-  TRAEFIK_PROVIDERS_DOCKER: "true"
-  TRAEFIK_PROVIDERS_DOCKER_CONSTRAINTS: Label(`com.docker.compose.project`, ``)
-  TRAEFIK_PROVIDERS_DOCKER_DEFAULTRULE: Host(`{{ normalize .Name | replace "-" ".localhost" }}`)
+  # TRAEFIK_PROVIDERS_DOCKER: "true"
+  # TRAEFIK_PROVIDERS_DOCKER_CONSTRAINTS: Label(`com.docker.compose.project`, ``)
+  # TRAEFIK_PROVIDERS_DOCKER_DEFAULTRULE: Host(`{{ normalize .Name | replace "-" ".localhost" }}`)
   TRAEFIK_PROVIDERS_FILE_FILENAME: /config/traefik.yaml
+  TRAEFIK_PROVIDERS_KUBERNETESINGRESS: "true"
 kind: ConfigMap
 metadata:
   labels:

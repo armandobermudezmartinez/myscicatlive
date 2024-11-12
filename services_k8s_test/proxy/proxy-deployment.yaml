@@ -76,25 +76,30 @@ spec:
                 configMapKeyRef:
                   key: TRAEFIK_ENTRYPOINTS_WEB_ASDEFAULT
                   name: proxy-env
-            - name: TRAEFIK_PROVIDERS_DOCKER
-              valueFrom:
-                configMapKeyRef:
-                  key: TRAEFIK_PROVIDERS_DOCKER
-                  name: proxy-env
-            - name: TRAEFIK_PROVIDERS_DOCKER_CONSTRAINTS
-              valueFrom:
-                configMapKeyRef:
-                  key: TRAEFIK_PROVIDERS_DOCKER_CONSTRAINTS
-                  name: proxy-env
-            - name: TRAEFIK_PROVIDERS_DOCKER_DEFAULTRULE
-              valueFrom:
-                configMapKeyRef:
-                  key: TRAEFIK_PROVIDERS_DOCKER_DEFAULTRULE
-                  name: proxy-env
+            # - name: TRAEFIK_PROVIDERS_DOCKER
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: TRAEFIK_PROVIDERS_DOCKER
+            #       name: proxy-env
+            # - name: TRAEFIK_PROVIDERS_DOCKER_CONSTRAINTS
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: TRAEFIK_PROVIDERS_DOCKER_CONSTRAINTS
+            #       name: proxy-env
+            # - name: TRAEFIK_PROVIDERS_DOCKER_DEFAULTRULE
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       key: TRAEFIK_PROVIDERS_DOCKER_DEFAULTRULE
+            #       name: proxy-env
             - name: TRAEFIK_PROVIDERS_FILE_FILENAME
               valueFrom:
                 configMapKeyRef:
                   key: TRAEFIK_PROVIDERS_FILE_FILENAME
+                  name: proxy-env
+            - name: TRAEFIK_PROVIDERS_KUBERNETESINGRESS
+              valueFrom:
+                configMapKeyRef:
+                  key: TRAEFIK_PROVIDERS_KUBERNETESINGRESS
                   name: proxy-env
           image: traefik:v3.2
           livenessProbe:

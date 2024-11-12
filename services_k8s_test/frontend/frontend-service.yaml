@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  labels:
+    io.kompose.service: frontend
+spec:
+  selector:
+    io.kompose.service: frontend
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      # nodePort: 32001 # Optional: Expose frontend-service on port 32001 (within the NodePort range)
+  type: ClusterIP # This can be LoadBalancer
