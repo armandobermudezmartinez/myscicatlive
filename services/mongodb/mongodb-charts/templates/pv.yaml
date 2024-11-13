@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Release.Name }}-{{ .Values.persistentVolumes.name }}
+  labels:
+    app.kubernetes.io/name: {{ .Chart.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    io.kompose.service: {{ .Values.persistentVolumes.komposeServiceLabel }}
+spec:
+  capacity:
+    storage: {{ .Values.persistentVolumes.capacity }}
+  accessModes:
+    - {{ .Values.persistentVolumes.accessMode }}
+  hostPath:
+    path: {{ .Values.persistentVolumes.hostPath }}

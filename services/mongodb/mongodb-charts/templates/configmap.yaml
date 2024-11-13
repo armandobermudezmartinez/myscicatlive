@@ -1,23 +1,23 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Release.Name }}-mongodb-init-config
+  name: {{ .Release.Name }}-{{ .Values.ConfigMaps.InitConfig.name }}
   annotations:
     use-subpath: "true"
   labels:
-    io.kompose.service: mongodb
+    io.kompose.service: {{ .Values.ConfigMaps.komposeServiceLabel }}
 data:
   init.sh: |
-    {{ .Values.initScript | nindent 4 }}
+    {{ .Values.ConfigMaps.InitConfig.initScript | nindent 4 }}
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Release.Name }}-mongodb-dataset-config
+  name: {{ .Release.Name }}-{{ .Values.ConfigMaps.DatasetConfig.name }}
   annotations:
     use-subpath: "true"
   labels:
-    io.kompose.service: mongodb
+    io.kompose.service: {{ .Values.ConfigMaps.komposeServiceLabel }}
 data:
   Dataset.json: |
-    {{ .Values.Dataset | nindent 4 }}
+    {{ .Values.ConfigMaps.DatasetConfig.Dataset | nindent 4 }}
