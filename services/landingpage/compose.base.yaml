@@ -6,8 +6,8 @@ services:
       # docker-entrypoint.d is available only in the nginx layer
       # so it is neglected in DEV
       - ./entrypoints/merge_json.sh:/docker-entrypoint.d/0.sh
-    profiles:
-      - search
+    # profiles:
+    #   - search
     restart: on-failure
     depends_on:
       backend:
