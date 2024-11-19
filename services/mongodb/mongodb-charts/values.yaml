@@ -1,4 +1,31 @@
-persistentVolumes:
+Deployments:
+  name: mongodb
+  komposeServiceLabel: mongodb
+  replicaCount: 1
+  mongodb:
+    name: mongodb
+    image:
+      repository: mongo
+      tag: "8.0"
+    resources:
+      requests:
+        memory: "512Mi"
+        cpu: "250m"
+      limits:
+        memory: "1Gi"
+        cpu: "500m"
+    env:
+      BE_VERSION: "v4"
+
+Services:
+  name: mongodb
+  komposeServiceLabel: mongodb
+  protocol: TCP
+  port: 27017
+  targetPort: 27017
+  type: ClusterIP
+
+Volumes:
   name: "mongodb-data"
   komposeServiceLabel: "backendv4-mongodb-data"
   capacity: "100Mi" # Storage capacity of the PV
@@ -9,6 +36,7 @@ ConfigMaps:
   komposeServiceLabel: "mongodb"
   InitConfig:
     name: mongodb-init-config
+    scriptName: init.sh
     initScript: |
       #!/bin/sh
 

@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f compose.yaml
+    kompose.version: 1.34.0 (cbf2835db)
+  labels:
+    io.kompose.service: {{ .Values.Deployments.komposeServiceLabel }}
+  name: {{ .Release.Name }}-{{ .Values.Deployments.name }}
+spec:
+  replicas: {{ .Values.Deployments.replicaCount }}
+  selector:
+    matchLabels:
+      io.kompose.service: {{ .Values.Deployments.komposeServiceLabel }}
+
+  template:
+    metadata:
+      labels:
+        io.kompose.service: {{ .Values.Deployments.komposeServiceLabel }}
+    spec:
+      containers:
+        - env:
+            - name: BE_VERSION
+              value: {{ .Values.Deployments.mongodb.env.BE_VERSION }}
+          image: {{ .Values.Deployments.mongodb.image.repository }}:{{ .Values.Deployments.mongodb.image.tag }}
+          name: {{ .Values.Deployments.mongodb.name }}
+          volumeMounts:
+            - mountPath: /data/db
+              name: {{ .Values.Volumes.name }}
+            - mountPath: /docker-entrypoint-initdb.d/{{ .Values.ConfigMaps.InitConfig.scriptName }}
+              name: {{ .Values.ConfigMaps.InitConfig.name }}
+              subPath: {{ .Values.ConfigMaps.InitConfig.scriptName }}
+            - mountPath: /seed
+              name: {{ .Values.ConfigMaps.DatasetConfig.name }}
+          resources:
+            requests:
+              memory: {{ .Values.Deployments.mongodb.resources.requests.memory }}
+              cpu: {{ .Values.Deployments.mongodb.resources.requests.cpu }}
+            limits:
+              memory: {{ .Values.Deployments.mongodb.resources.limits.memory }}
+              cpu: {{ .Values.Deployments.mongodb.resources.limits.cpu }}
+      restartPolicy: Always
+      volumes:
+        - name: {{ .Values.Volumes.name }}
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-{{ .Values.Volumes.name }}  # Reference PVC name
+        - configMap:
+            name: {{ .Release.Name }}-{{ .Values.ConfigMaps.InitConfig.name }}
+            items:
+              - key: init.sh
+                path: init.sh
+          name: {{ .Values.ConfigMaps.InitConfig.name }}
+        - configMap:
+            name: {{ .Release.Name }}-{{ .Values.ConfigMaps.DatasetConfig.name }}
+          name: {{ .Values.ConfigMaps.DatasetConfig.name }}

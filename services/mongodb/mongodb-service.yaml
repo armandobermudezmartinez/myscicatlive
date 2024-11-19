@@ -4,9 +4,9 @@ metadata:
   name: mongodb
 spec:
   selector:
-    io.kompose.service: mongodb # Ensure this matches the label of your MongoDB pod
+    io.kompose.service: mongodb # Ensure this matches the label of the MongoDB pod
   ports:
     - protocol: TCP
       port: 27017 # MongoDB default port
       targetPort: 27017
-  type: ClusterIP # This can be LoadBalancer
+  type: ClusterIP
