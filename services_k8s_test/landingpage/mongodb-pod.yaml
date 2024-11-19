@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f compose.yaml -f ../../../myscicatlive/services/backend/compose.yaml -f ../../../myscicatlive/services/mongodb/compose.yaml
+    kompose.version: 1.34.0 (cbf2835db)
+  labels:
+    io.kompose.service: mongodb
+  name: mongodb
+spec:
+  containers:
+    - env:
+        - name: BE_VERSION
+          value: v4
+      image: mongo:8.0
+      name: mongodb
+      volumeMounts:
+        - mountPath: /data/db
+          name: backendv4-mongodb-data
+        - mountPath: /docker-entrypoint-initdb.d/init.sh
+          name: mongodb-claim1
+        - mountPath: /seed
+          name: mongodb-claim2
+  restartPolicy: OnFailure
+  volumes:
+    - name: backendv4-mongodb-data
+      persistentVolumeClaim:
+        claimName: backendv4-mongodb-data
+    - name: mongodb-claim1
+      persistentVolumeClaim:
+        claimName: mongodb-claim1
+    - name: mongodb-claim2
+      persistentVolumeClaim:
+        claimName: mongodb-claim2

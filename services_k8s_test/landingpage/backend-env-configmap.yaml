@@ -1,0 +1,16 @@
+apiVersion: v1
+data:
+  ADMIN_GROUPS: admin
+  CREATE_DATASET_GROUPS: ingestor
+  DELETE_GROUPS: buggy
+  EXPRESS_SESSION_SECRET: secret
+  JWT_SECRET: secret
+  MONGODB_URI: mongodb://mongodb:27017/dacat-next
+  PROPOSAL_GROUPS: proposalingestor
+  SAMPLE_GROUPS: ingestor
+  SITE: FACILITY
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: backend-backend-env
+  name: backend-env

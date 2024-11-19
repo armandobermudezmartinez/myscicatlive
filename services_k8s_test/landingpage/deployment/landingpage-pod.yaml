@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f compose.yaml -f ../../../myscicatlive/services/backend/compose.yaml -f ../../../myscicatlive/services/mongodb/compose.yaml
+    kompose.version: 1.34.0 (cbf2835db)
+    traefik.http.routers.landingpage.rule: Host(`landingpage.localhost`)
+  labels:
+    io.kompose.service: landingpage
+  name: landingpage
+spec:
+  containers:
+    - env:
+        - name: BACKEND_URL
+          value: http://backend.localhost
+        - name: FRONTEND_URL
+          value: http://localhost
+      image: ghcr.io/scicatproject/landingpageserver:v3.3
+      name: landingpage
+      volumeMounts:
+        - mountPath: /config/0.json
+          name: landingpage-cm0
+          subPath: 0.json
+        - mountPath: /docker-entrypoint.d/0.sh
+          name: landingpage-cm1
+          subPath: 0.sh
+  restartPolicy: OnFailure
+  volumes:
+    - configMap:
+        items:
+          - key: config.json
+            path: 0.json
+        name: landingpage-cm0
+      name: landingpage-cm0
+    - configMap:
+        items:
+          - key: merge_json.sh
+            path: 0.sh
+        name: landingpage-cm1
+      name: landingpage-cm1
