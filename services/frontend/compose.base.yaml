@@ -15,7 +15,7 @@ services:
     entrypoint: loop_entrypoints.sh
     command: nginx -g "daemon off;"
     labels:
-      - traefik.http.routers.frontend.rule=Host(`localhost`)
+      - traefik.http.routers.frontend.rule=Host(`frontend.localhost`)
     restart: on-failure
     environment:
       BACKEND_URL: ${BACKEND_HTTPS_URL:-http://backend.localhost}
