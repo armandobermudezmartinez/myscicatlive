@@ -12,6 +12,8 @@ services:
     depends_on:
       backend:
         condition: service_healthy
+    labels:
+      - traefik.http.routers.landingpage.rule=Host(`landingpage.localhost`)
     environment:
       BACKEND_URL: ${BACKEND_HTTPS_URL:-http://backend.localhost}
       FRONTEND_URL: ${FRONTEND_HTTPS_URL:-http://localhost}
