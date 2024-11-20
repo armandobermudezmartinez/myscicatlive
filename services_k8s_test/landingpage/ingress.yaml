@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: landingpage
+  namespace: default
+  labels:
+    io.kompose.service: landingpage
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 16m
+    nginx.org/client-max-body-size: 16m
+spec:
+  rules:
+    - host: "landingpage"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: landingpage-service
+                port:
+                  number: 80
