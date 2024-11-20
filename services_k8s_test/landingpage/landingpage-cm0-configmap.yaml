@@ -1,0 +1,17 @@
+apiVersion: v1
+data:
+  config.json: |
+    {
+        "directMongoAccess": true,
+        "doiBaseUrl": "http://localhost/landingpage/detail/",
+        "facility": "facility",
+        "scicatBaseUrl": "http://frontend-service:80",
+        "lbBaseUrl": "http://backend-service:3000"
+    }
+kind: ConfigMap
+metadata:
+  annotations:
+    use-subpath: "true"
+  labels:
+    io.kompose.service: landingpage
+  name: landingpage-cm0
