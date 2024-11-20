@@ -1,6 +1,6 @@
 # SciCatLive with Kubernetes manifests
 
-Explore the metadata catalog with Kubernetes deployments. For a Scicat guide please see [original documentation](https://scicatproject.github.io/documentation/).
+Explore the metadata catalog with Kubernetes deployments. For a Scicat guide please see [original documentation](https://scicatproject.github.io/documentation/), [scicatlive repo](https://github.com/SciCatProject/scicatlive)
 
 This project requires kubernetes kubectl, API server, etcd, controller manager, scheduler, kubelet, and also important, enabled ingress. It has been tested using Microk8s.
 
