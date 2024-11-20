@@ -11,7 +11,7 @@ This project requires kubernetes kubectl, API server, etcd, controller manager, 
 
 1. Clone the repository
    ```sh
-   git clone [https://github.com/armandobermudezmartinez/myscicatlive](https://github.com/armandobermudezmartinez/myscicatlive)
+   git clone https://github.com/armandobermudezmartinez/myscicatlive
    ```
 2. Run with the following command inside the directory
    ```sh
