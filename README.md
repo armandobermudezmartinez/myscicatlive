@@ -15,5 +15,5 @@ This project requires kubernetes kubectl, API server, etcd, controller manager, 
    ```
 2. Run with the following command inside the directory
    ```sh
-   kubectl apply -Rf ../myscicatlive
+   kubectl apply -Rf services
    ```
