@@ -25,14 +25,14 @@ spec:
             - daemon off;
           command:
             - loop_entrypoints.sh
-          env:
-            - name: BACKEND_URL
-              # value: http://backend-service:3000
-              # value: http://127.0.0.1:32000/
-              value: http://localhost:32000/
-            # - name: BACKEND_HTTPS_URL
-            # value: https://backend-service:3000
-            # value: http://127.0.0.1:32000/
+          # env:
+          #   - name: BACKEND_URL
+          #     # value: http://backend-service:3000
+          #     # value: http://127.0.0.1:32000/
+          #     value: http://localhost:32000/
+          #   # - name: BACKEND_HTTPS_URL
+          #   # value: https://backend-service:3000
+          #   # value: http://127.0.0.1:32000/
           image: ghcr.io/scicatproject/frontend:v4.4.1
           #   image: bermudea/frontend:test
           name: frontend
