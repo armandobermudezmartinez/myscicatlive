@@ -11,5 +11,4 @@ spec:
     - port: 80
       targetPort: 80
       protocol: TCP
-      # nodePort: 32001 # Optional: Expose frontend-service on port 32001 (within the NodePort range)
   type: ClusterIP # This can be LoadBalancer
