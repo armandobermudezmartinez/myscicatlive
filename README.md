@@ -17,3 +17,8 @@ This project requires kubernetes kubectl, API server, etcd, controller manager, 
    ```sh
    kubectl apply -Rf services
    ```
+3. Endpoints:
+
+- The frontend is available at `http://localhost`
+- The backend api is available at `http://localhost/api`, it can be explored at `http://localhost/explorer`
+- The landingpage is available at `http://localhost.landingpage`
