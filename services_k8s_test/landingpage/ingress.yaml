@@ -10,7 +10,7 @@ metadata:
     nginx.org/client-max-body-size: 16m
 spec:
   rules:
-    - host: "landingpage"
+    - host: "landingpage.localhost"
       http:
         paths:
           - path: /
