@@ -15,5 +15,5 @@ data:
 kind: ConfigMap
 metadata:
   labels:
-    io.kompose.service: proxy-proxy-env
+    io.kompose.service: proxy-env
   name: proxy-env
