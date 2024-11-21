@@ -5,5 +5,5 @@ data:
 kind: ConfigMap
 metadata:
   labels:
-    io.kompose.service: proxy-tls-env
+    io.kompose.service: proxy-proxy-tls-env
   name: proxy-tls-env
