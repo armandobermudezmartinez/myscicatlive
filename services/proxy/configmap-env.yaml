@@ -4,5 +4,5 @@ data:
 kind: ConfigMap
 metadata:
   labels:
-    io.kompose.service: proxy-env
+    io.kompose.service: env
   name: env
