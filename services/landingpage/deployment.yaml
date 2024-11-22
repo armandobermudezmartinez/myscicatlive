@@ -25,6 +25,7 @@ spec:
             - name: FRONTEND_URL
               value: https://frontend-service:80
           image: ghcr.io/scicatproject/landingpageserver:v3.3
+          # image: bermudea/my_landing_page
           name: landingpage
           volumeMounts:
             - mountPath: /config/0.json
@@ -53,4 +54,5 @@ spec:
               - key: merge_json.sh
                 path: 0.sh
             name: landingpage-cm1
+            defaultMode: 0755
           name: landingpage-cm1
