@@ -3,10 +3,10 @@ data:
   config.json: |
     {
         "directMongoAccess": true,
-        "doiBaseUrl": "http://localhost/landingpage/detail/",
+        "doiBaseUrl": "http://landingpage.localhost/detail/",
         "facility": "facility",
-        "scicatBaseUrl": "http://frontend-service:80",
-        "lbBaseUrl": "http://backend-service:3000"
+        "scicatBaseUrl": "http://localhost",
+        "lbBaseUrl": "http://localhost"
     }
 kind: ConfigMap
 metadata:
